@@ -42,6 +42,7 @@ def load_cifar10(hyperparameters: dict):
                                             shuffle=False, num_workers=2)
 
     # changed this so that it's pulling from the CIFAR10 dataset instead of being hard coded
-    class_names = torchvision.datasets.CIFAR10.classes
+    class_names = ['plane', 'car', 'bird', 'cat',
+           'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
     
     return train_loader,val_loader, test_loader,class_names, 
