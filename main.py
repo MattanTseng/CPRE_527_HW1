@@ -1,8 +1,19 @@
 from src import load_cifar10, Net, training_step, evaluate, config_loader
 import numpy as np
 import time
+import torch
 
 if __name__ == '__main__':
+
+    # check to see what hardware we can run this on.
+    if torch.backends.mps.is_available():
+        device = torch.device("mps")
+    elif torch.cuda.is_available():
+        device = "cuda"
+    else:
+        device = "cpu"
+
+
     config_location = "/Users/mattantseng/Documents/Python/CPRE_527_HW1/hyperparameters.YAML"
 
     hyper_params = config_loader(config_location)
@@ -21,19 +32,23 @@ if __name__ == '__main__':
     n_epochs = hyper_params["epochs"]
     model = Net()
 
+    model.to(device)
+
     print("loading data: ")
     train_loader, test_loader,val_loader, classes = load_cifar10(hyper_params)
+
+
     print("Starting training: ")
     start_time = time.time()
     for epoch in range(n_epochs):
-        training_step(model, train_loader, epoch)
-        np.concatenate((validation_accuracies, np.array([evaluate(model, val_loader)])))
+        training_step(model, train_loader, epoch, device)
+        np.concatenate((validation_accuracies, np.array([evaluate(model, val_loader, device)])))
         print("-"*10,"Training finshed","-"*10)
 
     end_time = time.time()
     print("Done training")
 
-    test_accuracy = evaluate(model, test_loader)
+    test_accuracy = evaluate(model, test_loader, device)
 
 
 

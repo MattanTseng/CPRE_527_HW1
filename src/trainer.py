@@ -2,7 +2,7 @@ import torch.optim as optim
 import torch.nn as nn
 import numpy as np
 
-def training_step(model, trainloader, epoch):
+def training_step(model, trainloader, epoch, device: str):
     
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
@@ -12,6 +12,7 @@ def training_step(model, trainloader, epoch):
     for i, data in enumerate(trainloader, 0):
         # Get the inputs; data is a list of [inputs, labels]
         inputs, labels = data
+        inputs, labels = inputs.to(device), labels.to(device)
 
         # Zero the parameter gradients
         optimizer.zero_grad()
