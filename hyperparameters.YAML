@@ -12,6 +12,6 @@ max_batch: 100
 
 # since the CIFAR dataset has a built in test/train set, we don't need 
 # to define a value for the ratio of test images. Instead we are going to split
-# the train set into train and validation sets. 
+# the train set into train and validation sets
 validation_ratio: 0.1
 train_ratio: 0.9

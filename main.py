@@ -1,8 +1,13 @@
-from src import load_cifar10, Net, training_step, evaluate
+from src import load_cifar10, Net, training_step, evaluate, config_loader
 import numpy as np
 import time
 
 if __name__ == '__main__':
+    config_location = "/Users/mattantseng/Documents/Python/CPRE_527_HW1/hyperparameters.YAML"
+
+    hyper_params = config_loader(config_location)
+
+
     accuracies = np.ndarray()
     n_epochs = 10
     model = Net()

@@ -5,9 +5,11 @@ from sklearn.model_selection import train_test_split
 
 
 def load_cifar10(hyperparameters: dict):
-    validation_ratio = hyperparameters["validation_ratio"]
+
+    # pull out the ratio of images that are going to be used for training
     train_ratio =  hyperparameters["train_ratio"]
 
+    # pull out the batch size that we want to use.
     batch_size = hyperparameters["batch_size"]
     
     # Define transformations for the images
@@ -23,9 +25,11 @@ def load_cifar10(hyperparameters: dict):
     # Download and load training dataset
     trainset, val_set = train_test_split(all_cifar_data, train_size=train_ratio, stratify=all_cifar_data.targets)
     
+    # here's the validation set
     val_loader = torch.utils.data.DataLoader(val_set, batch_size=batch_size,
                                             shuffle=True, num_workers=2)
 
+    # here's the trainig set
     train_loader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
                                             shuffle=True, num_workers=2)
 
@@ -37,6 +41,7 @@ def load_cifar10(hyperparameters: dict):
     test_loader = torch.utils.data.DataLoader(test_set, batch_size=batch_size,
                                             shuffle=False, num_workers=2)
 
+    # changed this so that it's pulling from the CIFAR10 dataset instead of being hard coded
     class_names = torchvision.datasets.CIFAR10.classes
     
     return train_loader,val_loader, test_loader,class_names, 
