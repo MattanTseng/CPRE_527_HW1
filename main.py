@@ -8,20 +8,23 @@ if __name__ == '__main__':
     hyper_params = config_loader(config_location)
 
 
-    accuracies = np.ndarray()
-    n_epochs = 10
+
+
+    train_accuracies = np.ndarray()
+    validation_accuracies = np.ndarray()
+    n_epochs = hyper_params["epochs"]
     model = Net()
-    trainloader,testloader,classes = load_cifar10()
+    trainloader,testloader,val_loader, classes = load_cifar10()
     print("Starting training: ")
     start_time = time.time()
     for epoch in range(n_epochs):
         training_step(model, trainloader, epoch)
-        np.concatenate(accuracies, evaluate(model, testloader))
+        np.concatenate(train_accuracies, evaluate(model, val_loader))
         print("-"*10,"Training finshed","-"*10)
 
     end_time = time.time()
     print("Done training")
     run_time = end_time - start_time
 
-    print("Here are the accuracies of every epoch: ", accuracies)
+    print("Here are the train_accuracies of every epoch: ", train_accuracies)
     print("The run took: ", run_time, " seconds to run")
