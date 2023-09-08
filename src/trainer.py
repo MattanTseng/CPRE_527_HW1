@@ -27,8 +27,8 @@ def training_step(model, trainloader, epoch, device: str):
         running_loss += loss.item()
         if i % 2000 == 1999:  # Print every 2000 mini-batches
             print('[%d, %5d] loss: %.3f' % (epoch + 1, i + 1, running_loss / 2000))
-            np.concatenate((running_losses, np.array([running_loss])))
+            running_losses = np.concatenate((running_losses, np.array([running_loss / 2000])))
             running_loss = 0.0
 
     print('Epoch ', epoch, 'finished training')
-    return running_losses.mean()
+    return running_losses

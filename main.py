@@ -13,19 +13,13 @@ if __name__ == '__main__':
     else:
         device = "cpu"
 
+    print("Using device: ", device)
+
 
     config_location = "/Users/mattantseng/Documents/Python/CPRE_527_HW1/hyperparameters.YAML"
 
     hyper_params = config_loader(config_location)
     print("Hyperparameters: \n", hyper_params)
-
-    test_array = np.empty(0)
-    print("test_array: ", test_array, " Type: ", type(test_array))
-
-    blah = [1, 2, 3, 4]
-    print("Can I concate?", np.concatenate((test_array, np.array(blah))))
-
-
 
     mean_train_losses = np.empty(0)
     validation_accuracies = np.empty(0)
@@ -41,8 +35,8 @@ if __name__ == '__main__':
     print("Starting training: ")
     start_time = time.time()
     for epoch in range(n_epochs):
-        training_step(model, train_loader, epoch, device)
-        np.concatenate((validation_accuracies, np.array([evaluate(model, val_loader, device)])))
+        mean_train_losses = np.concatenate((mean_train_losses, training_step(model, train_loader, epoch, device)))
+        validation_accuracies = np.concatenate((validation_accuracies, np.array([evaluate(model, val_loader, device)])))
         print("-"*10,"Training finshed","-"*10)
 
     end_time = time.time()
