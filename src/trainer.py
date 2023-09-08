@@ -2,7 +2,7 @@ import torch.optim as optim
 import torch.nn as nn
 import numpy as np
 
-def training_step(model, trainloader, epoch, device: str):
+def training_step(model, trainloader, epoch, device: str, learning_rate: float):
     
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
