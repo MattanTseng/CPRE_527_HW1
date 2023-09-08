@@ -5,7 +5,7 @@ import numpy as np
 def training_step(model, trainloader, epoch, device: str, learning_rate: float):
     
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
+    optimizer = optim.SGD(model.parameters(), lr= learning_rate, momentum=0.9)
     
     running_losses = np.empty(0)
     running_loss = 0.0

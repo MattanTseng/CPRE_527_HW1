@@ -7,9 +7,9 @@ class My_Analytics:
     def __init__(self, output_location: str):
         self.output_location = output_location
         os.mkdir(output_location)
-        self.my_graphs = []
 
     def create_1D_graphs(self, losses: np.ndarray, x_name: str, y_name: str, title: str, show: bool = False):
+        plt.figure()
         plt.plot(losses)
         plt.xlabel(x_name)
         plt.ylabel(y_name)
@@ -17,8 +17,8 @@ class My_Analytics:
 
         if show:
             plt.show()
-
-        self.my_graphs.append(plt)
+        filename = title + '.png'  # Generate a unique filename for each graph
+        plt.savefig(os.path.join(self.output_location, filename))
 
 
     def export_graphs(self):

@@ -3,6 +3,7 @@ import numpy as np
 import time
 import torch
 import os
+import sys
 
 from src.analytics import My_Analytics
 
@@ -10,29 +11,32 @@ if __name__ == '__main__':
 
     # check to see what hardware we can run this on.
     if torch.backends.mps.is_available():
+        # this is for apple sillicon
         device = torch.device("mps")
     elif torch.cuda.is_available():
+        # this is for CUDA gpus
         device = "cuda"
     else:
+        # and if none of the above, then default to using the cpu
         device = "cpu"
 
-    print("Using device: ", device)
-
+    # I want to save the analytics to an adjacent location.
     current_file_path = os.path.abspath(__file__)
     current_dir = os.path.dirname(current_file_path)
 
-    config_location = os.path.join(current_dir, "hyperparameters.YAML")
+    # use runtime command to differentiate between different config files
+    config_file_name = "hyperparameters" + sys.argv[1] + ".YAML"
 
+    # based on where this file is.... locate the hyper parameter file. 
+    config_location = os.path.join(current_dir, config_file_name)
 
-
+    # read the config file to get the hyper paraemters
     hyper_params = config_loader(config_location)
+
+    # define some variables based on the config file
     n_epochs = hyper_params["epochs"]
     learning_rate = hyper_params["learning_rate"]
     
-    
-
-
-
 
     print("Hyperparameters: \n", hyper_params)
 
@@ -67,7 +71,6 @@ if __name__ == '__main__':
 
     analytics.create_1D_graphs(mean_train_losses, "image*10^4", "loss", "Training Losses")
     analytics.create_1D_graphs(validation_accuracies, "image*10^4", "accuracy", "Validation Accuracies")
-    analytics.export_graphs()
     analytics.create_report(run_time, hyper_params, test_accuracy, device)
 
 
