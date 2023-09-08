@@ -12,5 +12,5 @@ def evaluate(model, test_loader, device: str):
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
         accuracy = 100 * correct / total
-        print('Accuracy of the network on the 10000 test images: %d %%' % (100 * correct / total))
+        print('Accuracy: %d %%' % (100 * correct / total))
     return accuracy

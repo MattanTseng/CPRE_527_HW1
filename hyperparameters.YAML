@@ -3,9 +3,9 @@ max_epoch: 10
 
 learning_rate: 0.001
 
-batch_size: 4
+batch_size: 32
 
-epochs: 1
+epochs: 25
 
 # since the CIFAR dataset has a built in test/train set, we don't need 
 # to define a value for the ratio of test images. Instead we are going to split
