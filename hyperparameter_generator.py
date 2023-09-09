@@ -1,7 +1,7 @@
 import yaml
 import numpy as np
 
-epoch_array = np.arange(2, 25, 5)
+epoch_array = np.arange(25, 26, 5)
 learning_rate_array = np.linspace(0.001, 0.1, 5)
 batch_size_array = np.arange(10, 30, 10)
 
@@ -12,9 +12,9 @@ i = 1
 for epoch in epoch_array:
     for lr in learning_rate_array:
         for bs in batch_size_array:
-            temp_dict = {"epoch": int(epoch), 
+            temp_dict = {"epochs": int(epoch), 
                          "learning_rate": float(lr), 
-                         "batch_size": float(bs), 
+                         "batch_size": int(bs), 
                          "validation_ratio": validation_ratio, 
                          "train_ratio": train_ratio}
             filename = "hyperparameters" + str(i) + ".YAML"

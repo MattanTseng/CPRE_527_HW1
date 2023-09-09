@@ -23,7 +23,7 @@ monitor_processes() {
 }
 
 # Loop from 1 to 50 and run the Python script in the background
-for ((arg=1; arg<=3; arg++)); do
+for ((arg=1; arg<=10; arg++)); do
   # Monitor and limit the number of background processes
   monitor_processes
 
