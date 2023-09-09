@@ -4,7 +4,7 @@ import time
 import torch
 import os
 import sys
-
+from src.cnn import Net_500k
 from src.analytics import My_Analytics
 
 if __name__ == '__main__':
@@ -43,7 +43,8 @@ if __name__ == '__main__':
     mean_train_losses = np.empty(0)
     validation_accuracies = np.empty(0)
 
-    model = Net()
+    # model = Net()
+    model = Net_500k()
 
     dir_name = "E_" + str(n_epochs) + "_lr_" + str(learning_rate) + "_BS_" + str(hyper_params["batch_size"]) + "_" + model.__str__() 
     output_location = os.path.join(current_dir, dir_name)
