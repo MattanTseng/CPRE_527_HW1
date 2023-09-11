@@ -4,6 +4,7 @@ import torchvision.transforms as transforms
 from sklearn.model_selection import train_test_split
 
 
+# based on code from TA
 def load_cifar10(hyperparameters: dict):
 
     # pull out the ratio of images that are going to be used for training
