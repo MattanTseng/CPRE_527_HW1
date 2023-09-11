@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# Your Python script file (replace with the actual file path)
+# I did use chat GPT to help me write this section. I'm not super familiar with bash.
+# which python script is going to be run?
 PYTHON_SCRIPT="main.py"
 
-# Maximum number of simultaneous runs
+# how many instances of that script do I want at once? 
 MAX_SIMULTANEOUS_RUNS=5
 
 # Function to monitor and limit the number of background processes

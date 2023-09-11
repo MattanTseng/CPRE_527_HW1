@@ -1,6 +1,7 @@
 import yaml
 import numpy as np
 
+# this is a simple python script that creates a bunch of different config files.
 epoch_array = np.arange(25, 26, 5)
 learning_rate_array = np.linspace(0.001, 0.1, 5)
 batch_size_array = np.arange(10, 30, 10)

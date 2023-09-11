@@ -1,6 +1,7 @@
 import torch.nn as nn
 import torch.nn.functional as F
 
+# this is the default model from the TA
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
@@ -23,6 +24,7 @@ class Net(nn.Module):
         x = self.fc3(x)
         return x
 
+# this is the modified model with ~500K parameters
 class Net_500k(nn.Module):
     def __init__(self):
         super(Net_500k, self).__init__()
